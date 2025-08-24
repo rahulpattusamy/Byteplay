@@ -11,3 +11,9 @@ body {
   font-weight: 200;
   font-style: normal;
 }
+
+@layer base {
+  body {
+    @apply bg-gray-950 text-white;
+  }
+}
