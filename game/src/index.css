@@ -11,9 +11,12 @@ body {
   font-weight: 200;
   font-style: normal;
 }
-
+html{
+  scroll-behavior: smooth;
+}
 @layer base {
   body {
     @apply bg-gray-950 text-white;
+
   }
 }

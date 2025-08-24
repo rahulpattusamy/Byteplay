@@ -23,7 +23,7 @@ const GameBannerCarousel: React.FC = () => {
               <img
                 src={g.thumbnail}
                 alt={g.title}
-                className="w-full h-full object-cover"
+                className="w-full h-100  lg:h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-6">
                 <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
