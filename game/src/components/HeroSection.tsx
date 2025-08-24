@@ -1,7 +1,7 @@
 export const HeroSection = () => {
   return (
     <div>
-      <section className="relative py-20 px-6 text-center overflow-hidden">
+      <section className="relative py-20 px-6 text-center overflow-hidden mt-5">
         <div className="relative z-10">
           <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-white drop-shadow-lg">
             Welcome to <span className="text-purple-600">Byte Play</span>
