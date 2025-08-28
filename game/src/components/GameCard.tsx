@@ -12,13 +12,14 @@ const GameCard = () => {
       ? games
       : games.filter((g) => g.genre === selectedGenre);
 
-
   return (
     <section id="games" className="py-16 px-6">
       <h1 className="text-2xl font-bold text-center mb-6 text-white">
         Games: <span className="text-lg text-gray-300">{selectedGenre}</span>
       </h1>
-      <div className="flex justify-center mb-8">
+
+  
+      <div className="flex justify-center mb-8 sm:hidden">
         <select
           value={selectedGenre}
           onChange={(e) => setSelectedGenre(e.target.value)}
@@ -33,7 +34,23 @@ const GameCard = () => {
         </select>
       </div>
 
-      {/* Games Grid */}
+      <div className="hidden sm:flex justify-center gap-4 mb-8 flex-wrap">
+        {genres.map((genre) => (
+          <button
+            key={genre}
+            onClick={() => setSelectedGenre(genre)}
+            className={`px-4 py-2 rounded-lg font-semibold transition 
+              ${
+                selectedGenre === genre
+                  ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                  : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+              }`}
+          >
+            {genre}
+          </button>
+        ))}
+      </div>
+
       <motion.div
         className="grid gap-8 
                    grid-cols-1 
@@ -46,7 +63,7 @@ const GameCard = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ staggerChildren: 0.1 }} 
+        transition={{ staggerChildren: 0.1 }}
       >
         {filteredGames.slice(0, 24).map((g) => (
           <motion.div
@@ -56,10 +73,10 @@ const GameCard = () => {
                hover:shadow-pink-500/30 transition-all duration-300"
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: false, amount: 0.25 }} 
+            viewport={{ once: false, amount: 0.25 }}
             transition={{ duration: 0.45, ease: "easeOut" }}
-            whileHover={{ scale: 1.03, rotate: 0.5 }} 
-            whileTap={{ scale: 0.98 }} 
+            whileHover={{ scale: 1.03, rotate: 0.5 }}
+            whileTap={{ scale: 0.98 }}
             style={{ willChange: "transform" }}
           >
             <figure>
@@ -92,3 +109,4 @@ const GameCard = () => {
 };
 
 export default GameCard;
+
