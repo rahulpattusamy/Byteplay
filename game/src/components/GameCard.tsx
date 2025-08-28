@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion"; // 👈 import framer-motion
 import games from "../games.json";
 
 const GameCard = () => {
@@ -6,20 +7,30 @@ const GameCard = () => {
 
   const genres = ["All", ...new Set(games.map((g) => g.genre))];
 
-  
   const filteredGames =
     selectedGenre === "All"
       ? games
       : games.filter((g) => g.genre === selectedGenre);
 
+  // Animation variants
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.9, y: 50 },
+    visible: { opacity: 1, scale: 1, y: 0 },
+  };
+
   return (
-    <div id="games" className="min-h-screen lg:p-6"> 
-    <h1  className="text-xl font-bold text-center">Games: <span className="text-lg">{selectedGenre}</span></h1>
-      <div className="flex ml-22 mb-8">
+    <section id="games" className="py-16 px-6">
+      <h1 className="text-2xl font-bold text-center mb-6 text-white">
+        Games: <span className="text-lg text-gray-300">{selectedGenre}</span>
+      </h1>
+
+      {/* Genre Dropdown */}
+      <div className="flex justify-center mb-8">
         <select
           value={selectedGenre}
           onChange={(e) => setSelectedGenre(e.target.value)}
-          className="select select-bordered w-60 bg-gray-900  font-bold text-white border-purple-600 focus:border-pink-500"
+          className="select select-bordered w-60 bg-gray-900 font-bold text-white 
+                     border-purple-600 focus:border-pink-500"
         >
           {genres.map((genre) => (
             <option key={genre} value={genre}>
@@ -29,19 +40,40 @@ const GameCard = () => {
         </select>
       </div>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 pl-10 lg:pl-20 gap-6">
-        {filteredGames.slice(0, 21).map((g) => (
-          <div
+      {/* Games Grid */}
+      <motion.div
+        className="grid gap-8 
+                   grid-cols-1 
+                   sm:grid-cols-2 
+                   md:grid-cols-2 
+                   lg:grid-cols-3 
+                   xl:grid-cols-4 
+                   place-items-center 
+                   mx-auto max-w-7xl"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ staggerChildren: 0.1 }} 
+      >
+        {filteredGames.slice(0, 24).map((g) => (
+          <motion.div
             key={g.id}
-            className="card h-80 w-80 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 
-                       shadow-lg shadow-purple-900/30 border border-gray-800 rounded-2xl 
-                       hover:scale-105 hover:shadow-pink-500/30 transition-all duration-300"
+            className="card h-80 w-full sm:w-72 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 
+               shadow-lg shadow-purple-900/30 border border-gray-800 rounded-2xl 
+               hover:shadow-pink-500/30 transition-all duration-300"
+            initial={{ opacity: 0, y: 40, scale: 0.98 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: false, amount: 0.25 }} 
+            transition={{ duration: 0.45, ease: "easeOut" }}
+            whileHover={{ scale: 1.03, rotate: 0.5 }} 
+            whileTap={{ scale: 0.98 }} 
+            style={{ willChange: "transform" }}
           >
             <figure>
               <img
                 src={g.thumbnail}
                 alt={g.title}
-                className="h-48 w-full object-cover rounded-t-2xl"
+                className="h-45 w-full object-cover rounded-t-2xl"
               />
             </figure>
             <div className="card-body text-left">
@@ -59,13 +91,11 @@ const GameCard = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </section>
   );
 };
 
 export default GameCard;
-
-

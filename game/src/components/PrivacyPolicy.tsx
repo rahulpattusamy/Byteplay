@@ -1,3 +1,5 @@
+import { FaWhatsapp } from "react-icons/fa";
+
 const PrivacyPolicy = () => {
   return (
     <section id="privacy" className=" min-h-screen max-w-4xl mx-auto px-6 py-12 text-gray-300">
@@ -39,6 +41,14 @@ const PrivacyPolicy = () => {
         If you have any questions about this Privacy Policy, please reach out to us:  
         📧 <span className="text-purple-400">support@byteplay.com</span>
       </p>
+       <a
+        href="https://wa.me/7397036042"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg shadow-green-500/50 transition-transform hover:scale-110"
+      >
+        <FaWhatsapp size={28} />
+      </a>
     </section>
   );
 };
