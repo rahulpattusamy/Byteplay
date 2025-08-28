@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion"; // 👈 import framer-motion
+import { motion } from "framer-motion"; 
 import games from "../games.json";
 
 const GameCard = () => {
@@ -12,19 +12,12 @@ const GameCard = () => {
       ? games
       : games.filter((g) => g.genre === selectedGenre);
 
-  // Animation variants
-  const cardVariants = {
-    hidden: { opacity: 0, scale: 0.9, y: 50 },
-    visible: { opacity: 1, scale: 1, y: 0 },
-  };
 
   return (
     <section id="games" className="py-16 px-6">
       <h1 className="text-2xl font-bold text-center mb-6 text-white">
         Games: <span className="text-lg text-gray-300">{selectedGenre}</span>
       </h1>
-
-      {/* Genre Dropdown */}
       <div className="flex justify-center mb-8">
         <select
           value={selectedGenre}
